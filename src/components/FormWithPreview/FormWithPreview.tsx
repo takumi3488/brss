@@ -68,13 +68,16 @@ export default function FormWithPreview() {
         <h2 className="text-center font-bold mb-4">新規作成</h2>
         <form
           action={async function (formData: FormData) {
+            setDisabled(true);
+            setResult("作成中...");
             const res = await handleSubmit(formData);
             if ("msg" in res) {
               setPreview([res.msg]);
+              setDisabled(false);
+              setResult("");
               return;
             }
             setResult(res.uuid);
-            setDisabled(true);
           }}
         >
           <div className="pb-4">
