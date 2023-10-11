@@ -21,7 +21,10 @@ export default async function extractData(
   cache?: boolean,
 ): Promise<Page | { msg: string }> {
   const res = await fetch(url, {
-    cache: cache ? "force-cache" : "no-cache",
+    cache: cache ? undefined : "no-cache",
+    next: {
+      revalidate: cache ? 60 * 15 : undefined
+    }
   });
   // 一覧ページを取得
   if (!res.ok) return { msg: `${url} の取得に失敗しました` };
