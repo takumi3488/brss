@@ -81,7 +81,7 @@ export default async function extractData(
 function textToDatetime(text: string): string {
   const dt = new Date();
   const prevPtn = /(\d+)([秒分日]|時間)前/;
-  const datePtn = /(\d{4})年|-|\.(\d{1,2})月|-|\.(\d{1,2})日|-|\./;
+  const datePtn = /(\d{4})\D+(\d{1,2})\D+(\d{1,2})\D*/;
   switch (true) {
     case prevPtn.test(text):
       const [, num, unit] = text.match(prevPtn)!;
